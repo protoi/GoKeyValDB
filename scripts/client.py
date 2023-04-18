@@ -3,7 +3,16 @@ import time
 
 HOST = 'localhost'
 PORT = 4000
-messages = ["hello\n", "hey\n", "how\n", "whats up\n", "hi\n"]
+messages = [
+    "get mykey ",
+    "set something sdjkkdjf ",
+    "del mykey ",
+    "del ddfks fskdfsdkf dksjk fdjskjkf ",
+    "set fkdj ",
+    "set ",
+    "get dh djf dh hfhdfh ",
+    "del ",
+]
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))

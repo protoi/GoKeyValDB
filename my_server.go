@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"net"
 )
@@ -17,16 +18,24 @@ func handleConnection(conn net.Conn) {
 		fmt.Println("Connection closed successfully")
 	}(conn)
 
-	reader, writer := bufio.NewReader(conn), bufio.NewWriter(conn)
-
+	reader, writer := bufio.NewReader(bytes.NewBufferString("hello world$")), bufio.NewWriter(conn)
+	dupeReader := bufio.NewReader(conn)
 	for {
 		//Read data from the connection
-		data, err := reader.ReadBytes('\n')
+		// Handle the data reading part somewhere else I guess ????
+
+		reader = bufio.NewReader(bytes.NewBufferString("hello world$"))
+
+		data, err := reader.ReadBytes('$')
+		HandleRequest(dupeReader)
+		//data, err := bufio.NewReader(bytes.NewBufferString("sus amongus\n")).ReadBytes('\n')
+
 		if err != nil {
 			fmt.Println("Failed to read data: ", err.Error())
 			return
 		}
 		fmt.Println("Data read successfully", string(data[:]))
+		// check first 3 characters of the message to know if it is a get, set, put, del???
 
 		// sending the client an ack
 		_, err = writer.Write(data)
