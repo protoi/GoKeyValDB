@@ -20,11 +20,18 @@ func handleConnection(conn net.Conn) {
 	//reader := bufio.NewReader(bytes.NewBufferString("hello world$"))
 	dupeReader := bufio.NewReader(conn)
 	writer := bufio.NewWriter(conn)
+
+	//making a hashmap
+
+	db := make(map[string]string)
+
 	for {
 
-		HandleRequest(dupeReader)
+		s, b, i := HandleRequest(dupeReader, &db)
 
-		_, err := writer.WriteString("hey")
+		ack := fmt.Sprintf("=> %v %v %v", s, b, i)
+
+		_, err := writer.WriteString(ack)
 		if err != nil {
 			fmt.Println("Failed to write data: ", err.Error())
 			return
