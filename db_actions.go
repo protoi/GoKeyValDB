@@ -15,6 +15,13 @@ EXPIRE key seconds - sets a time-to-live (TTL) for a key in Redis, after which t
 KEYS pattern - returns all keys in Redis that match a given pattern.
 FLUSHDB - deletes all keys and their values from the current Redis database. ✅
 PING - checks if the Redis server is running and responds with "PONG".
+
+
+	TODO: try adding LISTPUSH and LISTPOP and LISTRANGE -> https://www.tutorialspoint.com/redis/redis_lists.htm
+	TODO: SETADD, SETPOP, SETMEMBERS, SETDIFF -> https://www.tutorialspoint.com/redis/redis_sets.htm
+	TODO: ZSETADD, ZSETPOP
+
+
 */
 
 func setValue(key string, value string, db *map[string]string) bool {
