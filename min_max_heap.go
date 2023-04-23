@@ -1,3 +1,5 @@
+//TODO: for a sorted set, heaps might not be the best way to go... look into order statistic tree, AVL tree, red-black tree, B-Trees and tries(since we are storing strings)
+
 package main
 
 import "fmt"
@@ -10,13 +12,13 @@ const (
 	MINHEAP
 )
 
-type Element struct {
+type HeapElement struct {
 	data   string
 	weight int
 }
 
 type Heap struct {
-	contents []*Element
+	contents []*HeapElement
 	size     int
 	ordering HeapType
 }
@@ -50,7 +52,7 @@ func (heap *Heap) comparator(a, b int, operator string) bool {
 
 func (heap *Heap) heapPush(data string, weight int) {
 	// Create a new element
-	newElement := &Element{data, weight}
+	newElement := &HeapElement{data, weight}
 
 	// Add the new element to the end of the heap
 	heap.contents = append(heap.contents, newElement)
@@ -62,10 +64,10 @@ func (heap *Heap) heapPush(data string, weight int) {
 	heap.propagateUp(heap.size - 1)
 }
 
-func (heap *Heap) heapPop() (Element, bool) {
+func (heap *Heap) heapPop() (HeapElement, bool) {
 	// Check if the heap is empty
 	if heap.size == 0 {
-		return Element{
+		return HeapElement{
 			data:   "",
 			weight: 0,
 		}, false
@@ -86,7 +88,7 @@ func (heap *Heap) heapPop() (Element, bool) {
 	// propagate the new root element down the heap as necessary
 	heap.propagateDown(0)
 
-	return Element{
+	return HeapElement{
 		data:   maxElement.data,
 		weight: maxElement.weight,
 	}, true

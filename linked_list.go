@@ -4,19 +4,19 @@ import (
 	"strings"
 )
 
-type Node struct {
+type BiDLLNode struct {
 	data     string
-	previous *Node
-	next     *Node
+	previous *BiDLLNode
+	next     *BiDLLNode
 }
 
 type BiDirectionalLinkedList struct {
-	head *Node
-	tail *Node
+	head *BiDLLNode
+	tail *BiDLLNode
 }
 
 func (list *BiDirectionalLinkedList) PushFront(data string) {
-	newNode := &Node{data: data, next: list.head}
+	newNode := &BiDLLNode{data: data, next: list.head}
 	if list.head != nil {
 		list.head.previous = newNode
 	}
@@ -27,7 +27,7 @@ func (list *BiDirectionalLinkedList) PushFront(data string) {
 }
 
 func (list *BiDirectionalLinkedList) PushBack(data string) {
-	newNode := &Node{data: data, previous: list.tail}
+	newNode := &BiDLLNode{data: data, previous: list.tail}
 	if list.tail != nil {
 		list.tail.next = newNode
 	}

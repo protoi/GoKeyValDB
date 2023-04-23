@@ -12,5 +12,6 @@ const (
 
 func main() {
 	fmt.Println("hello world")
-	StartServer(HOST, PORT, TYPE)
+	//StartServer(HOST, PORT, TYPE)
+	runner()
 }
