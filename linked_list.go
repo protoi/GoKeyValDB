@@ -80,7 +80,6 @@ func (list *BiDirectionalLinkedList) getListFront() string {
 	listElements = append(listElements, "nil")
 
 	return "[" + strings.Join(listElements, ", ") + "]"
-
 }
 
 func (list *BiDirectionalLinkedList) getListBack() string {

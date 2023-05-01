@@ -35,9 +35,9 @@ func (samp *Sample) init(values *[]int, weights *[]float64) {
 		return &tempWeights
 	})(weights, sumWeights)
 	samp.cumSum = &tempCumSum
-	samp.computerCumSum()
+	samp.computeCumSum()
 }
-func (samp *Sample) computerCumSum() {
+func (samp *Sample) computeCumSum() {
 	s := 0.0
 	for index, w := range *samp.weights {
 		s += w
@@ -310,7 +310,7 @@ func (sl *SkipList) PrintList() {
 
 func runner() {
 	sl := SkipList{}
-	sl.init(1000000)
+	sl.init(100000)
 
 	sl.Insert("hello", 3)
 	sl.Insert("world", 11)
