@@ -308,6 +308,10 @@ func (sl *SkipList) PrintList() {
 	}
 }
 
+/*
+key = string
+val = integer -> score
+*/
 func runner() {
 	sl := SkipList{}
 	sl.init(100000)
