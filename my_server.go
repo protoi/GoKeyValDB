@@ -18,7 +18,7 @@ func handleConnection(conn net.Conn) {
 	}(conn)
 
 	//reader := bufio.NewReader(bytes.NewBufferString("hello world$"))
-	dupeReader := bufio.NewReader(conn)
+	reader := bufio.NewReader(conn)
 	writer := bufio.NewWriter(conn)
 
 	//making a hashmap
@@ -27,7 +27,7 @@ func handleConnection(conn net.Conn) {
 
 	for {
 
-		s, b, i := HandleRequest(dupeReader, &db)
+		s, b, i := HandleRequest(reader, &db)
 
 		ack := fmt.Sprintf("=> %v %v %v", s, b, i)
 
