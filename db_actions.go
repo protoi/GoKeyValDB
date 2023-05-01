@@ -84,7 +84,7 @@ func extractKeyVal(data string) (string, string, bool) {
 	return "", "", false
 }
 
-func PerformAction(db *map[string]string, readData string) (string, bool, int) {
+func PerformAction(db *map[string]string, readData string, user *DataStructureCollection) (string, bool, int) {
 
 	// splitting upon a space
 	command, substance := "", ""
@@ -97,6 +97,9 @@ func PerformAction(db *map[string]string, readData string) (string, bool, int) {
 
 	key, val, status := "", "", false
 	switch command {
+	case "LIST":
+		a, b := HandleLinkedList(substance, user.ll_data)
+		return a, b, 0
 	case "set":
 		keyValStatus := false
 		if key, val, keyValStatus = extractKeyVal(substance); keyValStatus {

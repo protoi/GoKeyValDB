@@ -99,3 +99,16 @@ func (list *BiDirectionalLinkedList) getListBack() string {
 
 	return "[" + strings.Join(listElements, ", ") + "]"
 }
+
+func (list *BiDirectionalLinkedList) PeekFront() (string, bool) {
+	if list.head == nil {
+		return "", false
+	}
+	return list.head.data, true
+}
+func (list *BiDirectionalLinkedList) PeekBack() (string, bool) {
+	if list.tail == nil {
+		return "", false
+	}
+	return list.tail.data, true
+}
