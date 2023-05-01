@@ -100,6 +100,10 @@ func PerformAction(db *map[string]string, readData string, user *DataStructureCo
 	case "LIST":
 		a, b := HandleLinkedList(substance, user.ll_data)
 		return a, b, 0
+	case "KV":
+		a, b := HandleKeyValMapping(substance, user.kv_data)
+		return a, b, 0
+
 	case "set":
 		keyValStatus := false
 		if key, val, keyValStatus = extractKeyVal(substance); keyValStatus {

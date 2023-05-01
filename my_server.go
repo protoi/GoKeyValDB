@@ -7,7 +7,7 @@ import (
 )
 
 type DataStructureCollection struct {
-	kv_data *map[string]string
+	kv_data *map[string]*KeyValMapping
 	ll_data *map[string]*BiDirectionalLinkedList
 	sl_data *map[string]*SkipList
 }
@@ -31,7 +31,7 @@ func handleConnection(conn net.Conn) {
 	db := make(map[string]string)
 
 	// vanilla key val map + linked list map, skip list map
-	kv_ds := make(map[string]string)
+	kv_ds := make(map[string]*KeyValMapping)
 	ll_ds := make(map[string]*BiDirectionalLinkedList)
 	sl_ds := make(map[string]*SkipList)
 
