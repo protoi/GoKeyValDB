@@ -28,7 +28,7 @@ func handleConnection(conn net.Conn) {
 	writer := bufio.NewWriter(conn)
 
 	//making a hashmap of string string pai
-	db := make(map[string]string)
+	//db := make(map[string]string)
 
 	// vanilla key val map + linked list map, skip list map
 	kv_ds := make(map[string]*KeyValMapping)
@@ -43,7 +43,7 @@ func handleConnection(conn net.Conn) {
 
 	for {
 
-		s, b, i := HandleRequest(reader, &db, &user)
+		s, b, i := HandleRequest(reader, &user)
 
 		ack := fmt.Sprintf("=> %v %v %v", s, b, i)
 

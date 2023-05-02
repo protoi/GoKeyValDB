@@ -67,37 +67,38 @@ func HandleSkipList(substannce string, skipListMapping *map[string]*SkipList) (s
 			}
 		}
 	case "GETMAX":
-		if skipListName, status := SLgetSkipListNameOnly(substannce); status {
+		if skipListName, status := SLgetSkipListNameOnly(restOfTheString); status {
 			if sl, ok := (*skipListMapping)[skipListName]; ok {
 				return sl.GetMax()
 			}
 		}
 	case "GETMIN":
-		if skipListName, status := SLgetSkipListNameOnly(substannce); status {
+		if skipListName, status := SLgetSkipListNameOnly(restOfTheString); status {
 			if sl, ok := (*skipListMapping)[skipListName]; ok {
 				return sl.GetMin()
 			}
 		}
 	case "POPMAX":
-		if skipListName, status := SLgetSkipListNameOnly(substannce); status {
+		if skipListName, status := SLgetSkipListNameOnly(restOfTheString); status {
 			if sl, ok := (*skipListMapping)[skipListName]; ok {
 				return sl.PopMax()
 			}
 		}
 	case "POPMIN":
-		if skipListName, status := SLgetSkipListNameOnly(substannce); status {
+		if skipListName, status := SLgetSkipListNameOnly(restOfTheString); status {
 			if sl, ok := (*skipListMapping)[skipListName]; ok {
+				sl.PrintList()
 				return sl.PopMin()
 			}
 		}
 	case "GETPREV":
-		if skipListName, value, status := SLgetSkipListNameAndValue(substannce); status {
+		if skipListName, value, status := SLgetSkipListNameAndValue(restOfTheString); status {
 			if sl, ok := (*skipListMapping)[skipListName]; ok {
 				return sl.GetPredecessor(value)
 			}
 		}
 	case "GETNEXT":
-		if skipListName, value, status := SLgetSkipListNameAndValue(substannce); status {
+		if skipListName, value, status := SLgetSkipListNameAndValue(restOfTheString); status {
 			if sl, ok := (*skipListMapping)[skipListName]; ok {
 				return sl.GetSuccessor(value)
 			}
