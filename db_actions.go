@@ -104,6 +104,10 @@ func PerformAction(db *map[string]string, readData string, user *DataStructureCo
 		a, b := HandleKeyValMapping(substance, user.kv_data)
 		return a, b, 0
 
+	case "ZSET":
+		a, b, c := HandleSkipList(substance, user.sl_data)
+		return a, c, b
+
 	case "set":
 		keyValStatus := false
 		if key, val, keyValStatus = extractKeyVal(substance); keyValStatus {
