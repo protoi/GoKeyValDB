@@ -15,3 +15,9 @@ func main() {
 	StartServer(HOST, PORT, TYPE)
 	//runner()
 }
+
+/*
+TODO: allow for cross user interaction, let one user interact with another users data structures.
+	Obviously have some sort of authentication though.
+	Maybe a token issued when a hashset, linkedlist or zset is created
+*/

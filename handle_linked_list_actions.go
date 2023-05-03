@@ -26,7 +26,7 @@ func HandleLinkedList(substance string, linkedListMapping *map[string]*BiDirecti
 	}
 	switch command {
 	case "INIT":
-		if listName, status := LLgetListnameOnly(restOfTheString); status == true {
+		if listName, status := LLgetListNameOnly(restOfTheString); status == true {
 			// list of this name does not exist yet
 			if _, ok := (*linkedListMapping)[listName]; ok == false {
 				(*linkedListMapping)[listName] = &BiDirectionalLinkedList{}
@@ -35,7 +35,7 @@ func HandleLinkedList(substance string, linkedListMapping *map[string]*BiDirecti
 		}
 
 	case "PUSHFRONT":
-		if listName, elementToBePushed, status := LLgetListnameAndElement(restOfTheString); status == true {
+		if listName, elementToBePushed, status := LLgetListNameAndElement(restOfTheString); status == true {
 			// check if linked list of this name is present for this user
 			if ll, ok := (*linkedListMapping)[listName]; ok {
 				ll.PushBack(elementToBePushed)
@@ -43,7 +43,7 @@ func HandleLinkedList(substance string, linkedListMapping *map[string]*BiDirecti
 			}
 		}
 	case "PUSHBACK":
-		if listName, elementToBePushed, status := LLgetListnameAndElement(restOfTheString); status == true {
+		if listName, elementToBePushed, status := LLgetListNameAndElement(restOfTheString); status == true {
 			// check if linked list of this name is present for this user
 			if ll, ok := (*linkedListMapping)[listName]; ok {
 				ll.PushFront(elementToBePushed)
@@ -51,28 +51,28 @@ func HandleLinkedList(substance string, linkedListMapping *map[string]*BiDirecti
 			}
 		}
 	case "POPFRONT":
-		if listName, status := LLgetListnameOnly(restOfTheString); status == true {
+		if listName, status := LLgetListNameOnly(restOfTheString); status == true {
 			// check if linked list of this name is present for this user
 			if ll, ok := (*linkedListMapping)[listName]; ok {
 				return ll.PopFront()
 			}
 		}
 	case "POPBACK":
-		if listName, status := LLgetListnameOnly(restOfTheString); status == true {
+		if listName, status := LLgetListNameOnly(restOfTheString); status == true {
 			// check if linked list of this name is present for this user
 			if ll, ok := (*linkedListMapping)[listName]; ok {
 				return ll.PopBack()
 			}
 		}
 	case "PEEKFRONT":
-		if listName, status := LLgetListnameOnly(restOfTheString); status == true {
+		if listName, status := LLgetListNameOnly(restOfTheString); status == true {
 			// check if linked list of this name is present for this user
 			if ll, ok := (*linkedListMapping)[listName]; ok {
 				return ll.PeekFront()
 			}
 		}
 	case "PEEKBACK":
-		if listName, status := LLgetListnameOnly(restOfTheString); status == true {
+		if listName, status := LLgetListNameOnly(restOfTheString); status == true {
 			// check if linked list of this name is present for this user
 			if ll, ok := (*linkedListMapping)[listName]; ok {
 				return ll.PeekBack()
@@ -96,7 +96,7 @@ func LLgetCommandAndRest(substance string) (string, string, bool) {
 	}
 	return "", "", false
 }
-func LLgetListnameAndElement(substance string) (string, string, bool) {
+func LLgetListNameAndElement(substance string) (string, string, bool) {
 	var re = regexp.MustCompile(`(?m)^\s*(\w+)\s+(\w+)\s*$`)
 	match := re.FindStringSubmatch(substance)
 	if len(match) == 3 {
@@ -104,7 +104,7 @@ func LLgetListnameAndElement(substance string) (string, string, bool) {
 	}
 	return "", "", false
 }
-func LLgetListnameOnly(substance string) (string, bool) {
+func LLgetListNameOnly(substance string) (string, bool) {
 	var re = regexp.MustCompile(`(?m)^\s*(\w+)\s*$`)
 	match := re.FindStringSubmatch(substance)
 	if len(match) == 2 {

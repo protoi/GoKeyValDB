@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func HandleSkipList(substannce string, skipListMapping *map[string]*SkipList) (string, int, bool) {
+func HandleSkipList(substance string, skipListMapping *map[string]*SkipList) (string, int, bool) {
 	/*
 		input like ->
 		zset init <skiplist_name>
@@ -23,7 +23,7 @@ func HandleSkipList(substannce string, skipListMapping *map[string]*SkipList) (s
 		zset PrintList <skiplist_name>
 	*/
 
-	command, restOfTheString, status := SLgetCommandAndRest(substannce)
+	command, restOfTheString, status := SLgetCommandAndRest(substance)
 
 	if status == false {
 		return "", -1, false
@@ -104,7 +104,7 @@ func HandleSkipList(substannce string, skipListMapping *map[string]*SkipList) (s
 			}
 		}
 	default:
-		fmt.Println("Invalid command detected " + substannce)
+		fmt.Println("Invalid command detected " + substance)
 	}
 	return "", -1, false
 
