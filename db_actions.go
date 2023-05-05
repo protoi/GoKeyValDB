@@ -11,10 +11,7 @@ GET key - retrieves the value of a key in Redis. ✅
 DEL key - deletes a key and its value from Redis. ✅
 INCR key - increments the value of a key by 1. ✅
 DECR key - decrements the value of a key by 1. ✅
-EXPIRE key seconds - sets a time-to-live (TTL) for a key in Redis, after which the key and its value will be deleted.
-KEYS pattern - returns all keys in Redis that match a given pattern.
 FLUSHDB - deletes all keys and their values from the current Redis database. ✅
-PING - checks if the Redis server is running and responds with "PONG".
 
 
 	TODO: try adding LISTPUSH and LISTPOP and LISTRANGE -> https://www.tutorialspoint.com/redis/redis_lists.htm
@@ -24,7 +21,7 @@ PING - checks if the Redis server is running and responds with "PONG".
 
 */
 
-func PerformAction(readData string, user *DataStructureCollection) (string, bool, int) {
+func PerformAction(readData string, allUsers *map[string]*UserInformation, userInfo *UserInformation) (string, bool, int) {
 
 	// splitting upon a space
 	command, substance := "", ""
@@ -35,6 +32,8 @@ func PerformAction(readData string, user *DataStructureCollection) (string, bool
 		command = readData
 	}
 
+	var userID = userInfo.userID
+	user := (*allUsers)[userID].userDataStructures
 	switch command {
 	case "LIST":
 		element, status := HandleLinkedList(substance, user.ll_data)

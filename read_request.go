@@ -5,11 +5,11 @@ import (
 	"fmt"
 )
 
-func HandleRequest(reader *bufio.Reader, userData *DataStructureCollection) (string, bool, int) {
+func HandleRequest(reader *bufio.Reader, allUsers *map[string]*UserInformation, userInfo *UserInformation) (string, bool, int) {
 	if dataRead, success := ReadBuffer(reader); success {
 		fmt.Println("---> ", dataRead)
 
-		s, b, i := PerformAction(dataRead, userData)
+		s, b, i := PerformAction(dataRead, allUsers, userInfo)
 
 		fmt.Printf("%v %v %v\n", s, b, i)
 

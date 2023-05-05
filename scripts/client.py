@@ -25,7 +25,7 @@ messages = [
     # "KV SET xxx bbb ITISME",
     # "KV FLUSH xxx",
     # "KV FLUSH xxx",
-
+    "PROTOI $AAAABBBBCCCCDDDD%%",
     "ZSET INIT firstset ",
     "ZSET INSERT firstset hello 1 ",
     "ZSET INSERT firstset world 3 ",
