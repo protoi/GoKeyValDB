@@ -6,6 +6,12 @@ import (
 	"net"
 )
 
+type DataStructureCollection struct {
+	kv_data *map[string]*KeyValMapping
+	ll_data *map[string]*BiDirectionalLinkedList
+	sl_data *map[string]*SkipList
+}
+
 func handleConnection(conn net.Conn) {
 	// closing the connection
 	defer func(conn net.Conn) {
@@ -18,16 +24,26 @@ func handleConnection(conn net.Conn) {
 	}(conn)
 
 	//reader := bufio.NewReader(bytes.NewBufferString("hello world$"))
-	dupeReader := bufio.NewReader(conn)
+	reader := bufio.NewReader(conn)
 	writer := bufio.NewWriter(conn)
 
-	//making a hashmap
+	//making a hashmap of string string pai
+	//db := make(map[string]string)
 
-	db := make(map[string]string)
+	// vanilla key val map + linked list map, skip list map
+	kv_ds := make(map[string]*KeyValMapping)
+	ll_ds := make(map[string]*BiDirectionalLinkedList)
+	sl_ds := make(map[string]*SkipList)
+
+	user := DataStructureCollection{
+		kv_data: &kv_ds,
+		ll_data: &ll_ds,
+		sl_data: &sl_ds,
+	}
 
 	for {
 
-		s, b, i := HandleRequest(dupeReader, &db)
+		s, b, i := HandleRequest(reader, &user)
 
 		ack := fmt.Sprintf("=> %v %v %v", s, b, i)
 

@@ -4,26 +4,41 @@ import time
 HOST = 'localhost'
 PORT = 4000
 messages = [
-    "set a 100",
-    "set b 200",
-    "set b 300",
-    "get a",
-    "del a",
-    "set c 300",
-    "set d 400",
-    "set greetings hello world",
-    "set goodbyes im leaving bye bye",
-    "len",
-    "del b",
-    "get greetings",
-    "get goodbyes",
-    "get d",
-    "get c",
-    "get greetings",
-    "flush",
-    "len",
-    "dhfjdfj",
-    "djfhfd"
+    "KV INIT mymap",
+    "KV SET mymap aaa 111",
+    "KV GET mymap aaa",
+    "KV GET mymapbbb",
+    "KV SET mymap bbb 222",
+    "KV GET mymap bbb",
+    "KV SET mymap ccc 333",
+    "KV SET mymap ddd 444",
+    "KV SET mymap eee 555",
+    "KV SET mymap fff HELLOWORLD",
+    "KV GET mymap fff",
+    "KV DEL mymap fff",
+    "KV GET mymap fff",
+    "KV FLUSH mymap",
+    "KV GET mymap bbb",
+    "KV INIT xxx",
+    "KV SET xxx aaa HELLOWORLD",
+    "KV SET xxx bbb ITISME",
+    "KV FLUSH xxx",
+    "KV FLUSH xxx",
+    "ZSET INIT firstset ",
+    "ZSET INSERT firstset hello 1 ",
+    "ZSET INSERT firstset world 3 ",
+    "ZSET INSERT firstset whats 12 ",
+    "ZSET INSERT firstset up 4 ",
+    "ZSET INSERT firstset everyone 5 ",
+    "ZSET INSERT firstset hii 10 ",
+    "ZSET POPMIN firstset ",
+    "ZSET POPMIN firstset ",
+    "ZSET POPMIN firstset ",
+    "ZSET POPMIN firstset ",
+    "ZSET POPMIN firstset ",
+    "ZSET POPMIN firstset ",
+    "ZSET POPMIN firstset"
+
 ]
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -35,4 +50,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.sendall(message.encode())
         data = s.recv(200)
         print('Received:', data.decode())
-        time.sleep(1)
+        time.sleep(0.4)
