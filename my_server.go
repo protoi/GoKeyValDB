@@ -6,6 +6,12 @@ import (
 	"net"
 )
 
+type DataStructureCollection struct {
+	kv_data *map[string]*KeyValMapping
+	ll_data *map[string]*BiDirectionalLinkedList
+	sl_data *map[string]*SkipList
+}
+
 func handleConnection(conn net.Conn) {
 	// closing the connection
 	defer func(conn net.Conn) {
@@ -17,31 +23,43 @@ func handleConnection(conn net.Conn) {
 		fmt.Println("Connection closed successfully")
 	}(conn)
 
-	reader, writer := bufio.NewReader(conn), bufio.NewWriter(conn)
+	//reader := bufio.NewReader(bytes.NewBufferString("hello world$"))
+	reader := bufio.NewReader(conn)
+	writer := bufio.NewWriter(conn)
+
+	//making a hashmap of string string pai
+	//db := make(map[string]string)
+
+	// vanilla key val map + linked list map, skip list map
+	kv_ds := make(map[string]*KeyValMapping)
+	ll_ds := make(map[string]*BiDirectionalLinkedList)
+	sl_ds := make(map[string]*SkipList)
+
+	user := DataStructureCollection{
+		kv_data: &kv_ds,
+		ll_data: &ll_ds,
+		sl_data: &sl_ds,
+	}
 
 	for {
-		//Read data from the connection
-		data, err := reader.ReadBytes('\n')
-		if err != nil {
-			fmt.Println("Failed to read data: ", err.Error())
-			return
-		}
-		fmt.Println("Data read successfully", string(data[:]))
 
-		// sending the client an ack
-		_, err = writer.Write(data)
+		s, b, i := HandleRequest(reader, &user)
+
+		ack := fmt.Sprintf("=> %v %v %v", s, b, i)
+
+		_, err := writer.WriteString(ack)
 		if err != nil {
 			fmt.Println("Failed to write data: ", err.Error())
 			return
 		}
 
 		//Flushing the writer buffer
-		err = writer.Flush()
-		if err != nil {
-			fmt.Println("Failed to flush writer")
-			return
+		if writer.Size() > 0 {
+			if err = writer.Flush(); err != nil {
+				fmt.Println("Failed to flush writer")
+				return
+			}
 		}
-
 	}
 }
 
